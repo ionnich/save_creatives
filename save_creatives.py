@@ -8,6 +8,7 @@ def verify_input():
     if len(sys.argv) < 2:
         files = os.listdir()
         for file in files:
+            print(file)
             if file.endswith(".xlsx"):
                 file = file
                 print(f"using {file}")
@@ -16,6 +17,7 @@ def verify_input():
         file = sys.argv[1]
         if not file.endswith(".xlsx"):
             sys.exit("Input file must be an excel file (.xlsx)")
+        return file
 
     sys.exit("No excel file")
 
@@ -47,7 +49,7 @@ def save_creatives(entry):
 
 def main():
     file = verify_input()
-    df = pd.read_excel(file)
+    df = pd.read_excel(file, header=None)
 
     registry = []
     for index, row in df.iterrows():
